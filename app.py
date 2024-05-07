@@ -9,12 +9,18 @@ load_dotenv()
 def generate_trip_plan(destination, days, preferences):
     api_url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent"
 
-    # Data to be sent to the API
+        # Enhancing the prompt to be more detailed and engaging
+    prompt_text = (
+        f"Imagine you're a travel guide tasked with creating an unforgettable {days}-day adventure in {destination} for someone who loves "
+        f"{', '.join(preferences)}. Outline a detailed daily itinerary including hidden gems, local foods to try, and tips to make the most of their visit. "
+        "Make sure to include transport tips, best times to visit attractions, and any cultural etiquette they should follow."
+    )
+
     data = {
         "contents": [
             {
                 "parts": [
-                    {"text": f"Plan a trip to {destination} for {days} days, including: {', '.join(preferences)}."}
+                    {"text": prompt_text}
                 ]
             }
         ]
